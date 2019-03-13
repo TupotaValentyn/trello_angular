@@ -1,8 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { iif } from 'rxjs';
-
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -20,7 +18,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         BrowserAnimationsModule,
-        MatButtonModule, 
+        MatButtonModule,
         MatCheckboxModule,
         DragDropModule,
         ScrollingModule,
@@ -35,18 +33,6 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  // it('should create the app', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app).toBeTruthy();
-  // });
-
-  // it(`should have as title 'trello'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.debugElement.componentInstance;
-  //   expect(app.title).toEqual('trello');
-  // });
-
   it('should render title in a h1 tag', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
@@ -58,7 +44,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('div'))
+    expect(compiled.querySelector('div'));
   })
 
   it('tableIndex must be assigned  ', () => {
@@ -67,30 +53,30 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     app.onMouseMove(1);
     expect(app.tableIndex).toEqual(1);
-  })
+  });
 
   it('ItemIndex must be assigned', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const value = 1
+    const value = 1;
     app.onMouseMoveItem(value);
     expect(app.itemIndex).toEqual(value);
-  })
+  });
 
   it('item must by added to array', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const length = app.trello[1].data.length
-    const value = 'string'
-    app.addForArray(1, value)
-    expect(app.trello[1].data.length > length).toBeTruthy()
-  })
+    const length = app.trello[1].data.length;
+    const value = 'string';
+    app.addForArray(1, value);
+    expect(app.trello[1].data.length > length).toBeTruthy();
+  });
 
   it('delete item from array', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const length = app.trello[1].data.length
-    app.deleteItem(1, 1)
-    expect(app.trello[1].data.length < length).toBeTruthy()
-  })
+    const length = app.trello[1].data.length;
+    app.deleteItem(1, 1);
+    expect(app.trello[1].data.length < length).toBeTruthy();
+  });
 });

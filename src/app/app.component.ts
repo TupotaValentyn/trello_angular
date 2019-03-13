@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material';
-import { ModalComponent } from './modal/modal.component'
-
+import { ModalComponent } from './modal/modal.component';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +15,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit () {
-    
+
   }
 
-  curentTable: number
-  input: string
-  tableIndex: number
-  itemIndex: number
+  curentTable: number;
+  input: string;
+  tableIndex: number;
+  itemIndex: number;
   value = 'Clear me';
   trello = [
     {
@@ -54,7 +53,7 @@ export class AppComponent implements OnInit {
         'Pick up groceries'
       ]
     }
-  ]
+  ];
 
   todo = [
     'Get to work',
@@ -70,37 +69,37 @@ export class AppComponent implements OnInit {
     'Check e-mail',
     'Walk dog'
   ];
-  
+
   addColumn() {
     this.trello.push({
       name: 'new name',
       value: '',
       data: []
-    })
+    });
   }
 
-  onMouseMove(event: Event, id:number) {
-    this.tableIndex = id
-    console.log(event, this.tableIndex)
+  onMouseMove(event: Event, id: number) {
+    this.tableIndex = id;
   }
+
   onMouseMoveItem(index: number) {
-    this.itemIndex = index
+    this.itemIndex = index;
   }
 
   onTableClick(num: number) {
-    this.curentTable = num
+    this.curentTable = num;
   }
 
   addForArray(index: number, value: string) {
     if (value) {
-      this.trello[index].data.push(value)
+      this.trello[index].data.push(value);
     }
-    return true
+    return true;
   }
 
 
   openDialogName(name: string, index: number) {
-    this.input = name
+    this.input = name;
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
       data: {input: this.input}
@@ -109,12 +108,12 @@ export class AppComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.input = result || this.input;
-      this.trello[index].name = this.input
-    })
+      this.trello[index].name = this.input;
+    });
   }
 
   openDialog(text: string, tindex: number, iindex: number): void {
-    this.input = text
+    this.input = text;
 
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '250px',
@@ -125,12 +124,12 @@ export class AppComponent implements OnInit {
       console.log('The dialog was closed');
       this.input = result || this.input;
 
-      this.trello[tindex].data[iindex] = this.input 
-    })
+      this.trello[tindex].data[iindex] = this.input;
+    });
   }
 
   deleteItem(ind: number, i: number) {
-    this.trello[ind].data.splice(i, 1)
+    this.trello[ind].data.splice(i, 1);
   }
 
   superDrop(event: CdkDragDrop<string[]>) {
@@ -147,17 +146,17 @@ export class AppComponent implements OnInit {
   swap(event: CdkDragDrop<string[]>, ctindex: number) {
     if (ctindex === this.tableIndex) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      return 'change array'
+      return 'change array';
     } else {
-      this.trello[this.tableIndex].data.splice(this.itemIndex, 0, this.trello[ctindex].data[event.currentIndex])
-      this.trello[ctindex].data.splice(event.currentIndex, 1)
+      this.trello[this.tableIndex].data.splice(this.itemIndex, 0, this.trello[ctindex].data[event.currentIndex]);
+      this.trello[ctindex].data.splice(event.currentIndex, 1);
     }
   }
 
   drop(event: CdkDragDrop<string[]>) {
     if (!(event.previousContainer === event.container)) {
       moveItemInArray(event.container.data, this.curentTable, this.tableIndex);
-      return 'change array'
+      return 'change array';
     }
   }
 }
